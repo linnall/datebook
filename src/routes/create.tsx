@@ -1,4 +1,18 @@
-import { Box, BoxProps, Button, Heading, Input, Stack, Text, VStack, forwardRef } from "@chakra-ui/react";
+import {
+  Box,
+  BoxProps,
+  Button,
+  FormControl,
+  FormErrorMessage,
+  FormHelperText,
+  FormLabel,
+  Heading,
+  Input,
+  Stack,
+  Text,
+  VStack,
+  forwardRef,
+} from "@chakra-ui/react";
 import { useState } from "react";
 import { client } from "../main";
 import { Image } from "@chakra-ui/react";
@@ -23,10 +37,10 @@ const ImagePreview: React.FC<{ file: File }> = (props) => {
 };
 
 function Create() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
-  const [photos, setPhotos] = useState<FileList>();
+  const [title, setTitle] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [date, setDate] = useState(null);
+  const [photos, setPhotos] = useState<FileList>(null);
 
   const photosArray = Array.from(photos ?? []);
 
@@ -43,7 +57,7 @@ function Create() {
                 <Box position="absolute" top="0" left="0" height="100%" width="100%" display="flex" flexDirection="column">
                   <Stack height="100%" width="100%" display="flex" alignItems="center" justify="center" spacing="4">
                     <Stack p="8" textAlign="center" spacing="1">
-                      <Heading fontSize="lg" color="gray.700" fontWeight="bold">
+                      <Heading size="lg" color="#FB9600">
                         Drop images
                       </Heading>
                       <Text fontWeight="light">or click to upload</Text>
@@ -69,11 +83,44 @@ function Create() {
             </Box>
           </WrapItem>
         </Wrap>
-        <Input placeholder="Title" size="md" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-        <Input placeholder="What did you do?" size="md" type="text" value={description} onChange={(e) => setDescription(e.target.value)} />
-        <Input placeholder="Date" size="md" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+        <FormControl isInvalid={title === ""}>
+          <FormLabel>Title</FormLabel>
+          <Input size="md" type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
+          <FormErrorMessage>Title is required.</FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={description === ""}>
+          <FormLabel>Description</FormLabel>
+          <Input
+            placeholder="What did you do?"
+            size="md"
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+          <FormErrorMessage>Description is required.</FormErrorMessage>
+        </FormControl>
+        <FormControl isInvalid={date === undefined}>
+          <FormLabel>Date</FormLabel>
+          <Input size="md" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+          <FormErrorMessage>Date is required.</FormErrorMessage>
+        </FormControl>
         <Button
           onClick={async () => {
+            if (!title) {
+              setTitle("");
+              return;
+            }
+
+            if (!description) {
+              setDescription("");
+              return;
+            }
+
+            if (!date) {
+              setDate(undefined);
+              return;
+            }
+
             let fileIds = [];
 
             if (photos) {
