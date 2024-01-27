@@ -12,7 +12,7 @@ const NavBar = () => {
             </Text>
           </HStack>
           <Link to={"/timeline"}>Timeline</Link>
-          <Link to={"/add"}>Add</Link>
+          <Link to={"/create"}>Add</Link>
         </HStack>
       </HStack>
       <Outlet />

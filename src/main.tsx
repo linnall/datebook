@@ -21,7 +21,7 @@ const router = createBrowserRouter([
         element: <Timeline />,
       },
       {
-        path: "add",
+        path: "create",
         element: <Create />,
       },
     ],
