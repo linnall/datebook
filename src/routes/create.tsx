@@ -38,7 +38,7 @@ function Create() {
             <ImagePreview file={file} />
           ))}
           <WrapItem>
-            <Box w="10em" h="10em" borderColor="gray.300" borderStyle="dashed" borderWidth="2px" rounded="md" shadow="sm">
+            <Box w="10em" h="10em" border="8px ridge #aaaaaa">
               <Box position="relative" height="100%" width="100%">
                 <Box position="absolute" top="0" left="0" height="100%" width="100%" display="flex" flexDirection="column">
                   <Stack height="100%" width="100%" display="flex" alignItems="center" justify="center" spacing="4">
