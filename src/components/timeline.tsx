@@ -10,7 +10,7 @@ export const Milestones = (props) => {
       description: record.description.value,
     }))
     .sort((a, b) => {
-      return a.date - b.date;
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
     });
 
   const isDesktop = useBreakpointValue({ base: false, md: true });
@@ -19,21 +19,21 @@ export const Milestones = (props) => {
 
   return (
     <Container maxWidth="7xl" p={{ base: 2, sm: 10 }}>
-      {milestones.map((milestone) => (
+      {milestones.map((milestone, idx) => (
         <Flex key={milestone.id} mb="10px">
           {/* Desktop view(left card) */}
-          {isDesktop && milestone.id % 2 === 0 && (
+          {isDesktop && idx % 2 === 0 && (
             <>
               <EmptyCard />
               <LineWithDot />
-              <Card {...milestone} />
+              <Card {...milestone} isLeft />
             </>
           )}
 
           {/* Desktop view(right card) */}
-          {isDesktop && milestone.id % 2 !== 0 && (
+          {isDesktop && idx % 2 !== 0 && (
             <>
-              <Card {...milestone} />
+              <Card {...milestone} isLeft={false} />
               <LineWithDot />
               <EmptyCard />
             </>
@@ -49,15 +49,15 @@ interface CardProps {
   title: string;
   description: string;
   date: string;
+  isLeft: boolean;
 }
 
-const Card = ({ id, title, description, date }: CardProps) => {
+const Card = ({ id, title, description, date, isLeft }: CardProps) => {
   // For even id show card on left side
   // For odd id show card on right side
-  const isEvenId = id % 2 == 0;
-  let borderWidthValue = isEvenId ? "15px 15px 15px 0" : "15px 0 15px 15px";
-  let leftValue = isEvenId ? "-15px" : "unset";
-  let rightValue = isEvenId ? "unset" : "-15px";
+  let borderWidthValue = isLeft ? "15px 15px 15px 0" : "15px 0 15px 15px";
+  let leftValue = isLeft ? "-15px" : "unset";
+  let rightValue = isLeft ? "unset" : "-15px";
 
   const navigate = useNavigate();
 
@@ -87,7 +87,7 @@ const Card = ({ id, title, description, date }: CardProps) => {
       }}
     >
       <Box>
-        <Text fontSize="lg" color={isEvenId ? "teal.400" : "blue.400"}>
+        <Text fontSize="lg" color={isLeft ? "teal.400" : "blue.400"}>
           {date}
         </Text>
 
