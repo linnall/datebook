@@ -1,15 +1,5 @@
 import React from "react";
-import {
-  Box,
-  chakra,
-  Container,
-  Text,
-  HStack,
-  VStack,
-  Flex,
-  useColorModeValue,
-  useBreakpointValue,
-} from "@chakra-ui/react";
+import { Box, chakra, Container, Text, HStack, VStack, Flex, useColorModeValue, useBreakpointValue } from "@chakra-ui/react";
 
 const dummyMilestones = [
   {
@@ -48,9 +38,6 @@ const Milestones = (props) => {
 
   return (
     <Container maxWidth="7xl" p={{ base: 2, sm: 10 }}>
-      <chakra.h3 fontSize="4xl" fontWeight="bold" mb={18} textAlign="center">
-        Milestones
-      </chakra.h3>
       {props.milestones.map((milestone) => (
         <Flex key={milestone.id} mb="10px">
           {/* Desktop view(left card) */}
@@ -113,17 +100,13 @@ const Card = ({ id, title, description, date }: CardProps) => {
       p={{ base: 3, sm: 6 }}
       bg={useColorModeValue("gray.100", "gray.800")}
       spacing={5}
-      rounded="lg"
       alignItems="center"
       pos="relative"
       _before={{
         content: `""`,
         w: "0",
         h: "0",
-        borderColor: `transparent ${useColorModeValue(
-          "#edf2f6",
-          "#1a202c"
-        )} transparent`,
+        borderColor: `transparent ${useColorModeValue("#edf2f6", "#1a202c")} transparent`,
         borderStyle: "solid",
         borderWidth: borderWidthValue,
         position: "absolute",
@@ -150,12 +133,7 @@ const Card = ({ id, title, description, date }: CardProps) => {
 
 const LineWithDot = () => {
   return (
-    <Flex
-      pos="relative"
-      alignItems="center"
-      mr={{ base: "40px", md: "40px" }}
-      ml={{ base: "0", md: "40px" }}
-    >
+    <Flex pos="relative" alignItems="center" mr={{ base: "40px", md: "40px" }} ml={{ base: "0", md: "40px" }}>
       <chakra.span
         position="absolute"
         left="50%"
@@ -187,13 +165,7 @@ const LineWithDot = () => {
 };
 
 const EmptyCard = () => {
-  return (
-    <Box
-      flex={{ base: 0, md: 1 }}
-      p={{ base: 0, md: 6 }}
-      bg="transparent"
-    ></Box>
-  );
+  return <Box flex={{ base: 0, md: 1 }} p={{ base: 0, md: 6 }} bg="transparent"></Box>;
 };
 
 export { Milestones };

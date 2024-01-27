@@ -22,7 +22,6 @@ function Timeline() {
 
   return (
     <>
-      <Text>Timeline</Text>
       <Milestones milestones={milestones} />
     </>
   );
