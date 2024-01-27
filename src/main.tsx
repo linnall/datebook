@@ -8,6 +8,7 @@ import Login from "./routes/login.tsx";
 import Timeline from "./routes/timeline.tsx";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { KintoneRestAPIClient } from "@kintone/rest-api-client";
+import Record from "./routes/record.tsx";
 import "./main.css";
 
 export const client = new KintoneRestAPIClient({
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "create",
         element: <Create />,
+      },
+      {
+        path: "record/:id",
+        element: <Record />,
       },
     ],
   },
