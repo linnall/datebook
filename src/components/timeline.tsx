@@ -1,14 +1,7 @@
 import { Box, chakra, Container, Text, HStack, VStack, Flex, useColorModeValue, useBreakpointValue } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
-interface MilestonesProps {
-  id: number;
-  date: string;
-  title: string;
-  description: string;
-}
-
-const Milestones = (props) => {
-  const isMobile = useBreakpointValue({ base: true, md: false });
+export const Milestones = (props) => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
   if (!props.milestones) return null;
@@ -26,19 +19,10 @@ const Milestones = (props) => {
             </>
           )}
 
-          {/* Mobile view */}
-          {isMobile && (
-            <>
-              <LineWithDot />
-              <Card {...milestone} />
-            </>
-          )}
-
           {/* Desktop view(right card) */}
           {isDesktop && milestone.id % 2 !== 0 && (
             <>
               <Card {...milestone} />
-
               <LineWithDot />
               <EmptyCard />
             </>
@@ -64,21 +48,20 @@ const Card = ({ id, title, description, date }: CardProps) => {
   let leftValue = isEvenId ? "-15px" : "unset";
   let rightValue = isEvenId ? "unset" : "-15px";
 
-  const isMobile = useBreakpointValue({ base: true, md: false });
-  if (isMobile) {
-    leftValue = "-15px";
-    rightValue = "unset";
-    borderWidthValue = "15px 15px 15px 0";
-  }
+  const navigate = useNavigate();
 
   return (
     <HStack
+      onClick={() => {
+        navigate(`/signed_in/record/${id}`);
+      }}
       flex={1}
       p={{ base: 3, sm: 6 }}
       bg={useColorModeValue("gray.100", "gray.800")}
       spacing={5}
       alignItems="center"
       pos="relative"
+      _hover={{ bg: "gray.300" }}
       _before={{
         content: `""`,
         w: "0",
@@ -143,6 +126,3 @@ const LineWithDot = () => {
 const EmptyCard = () => {
   return <Box flex={{ base: 0, md: 1 }} p={{ base: 0, md: 6 }} bg="transparent"></Box>;
 };
-
-export { Milestones };
-export type { MilestonesProps };
