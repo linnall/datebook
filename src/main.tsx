@@ -7,6 +7,12 @@ import Create from "./routes/create.tsx";
 import Login from "./routes/login.tsx";
 import Timeline from "./routes/timeline.tsx";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { KintoneRestAPIClient } from "@kintone/rest-api-client";
+
+export const client = new KintoneRestAPIClient({
+  baseUrl: "https://uofthacks.qhyun.org/proxy",
+  auth: { apiToken: "In6YFm0X5ek3iwrQj8I0iwXiHnTnkQwRwMDVGHnP" },
+});
 
 const router = createBrowserRouter([
   {
