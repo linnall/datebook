@@ -15,7 +15,19 @@ function Create() {
       <Input placeholder="Date" size="md" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
       <Input placeholder="Photos" size="md" type="file" multiple onChange={(e) => setPhotos(e.target.files ?? undefined)} />
       <Button
-        onClick={() => {
+        onClick={async () => {
+          let fileIds = [];
+
+          if (photos) {
+            for (let i = 0; i < photos.length; i++) {
+              const file = photos.item(i);
+              if (!file) continue;
+              await client.file
+                .uploadFile({ file: { name: file.name, data: await file.arrayBuffer() } })
+                .then((res) => fileIds.push(res.fileKey));
+            }
+          }
+
           client.record
             .addRecord({
               app: 2,
@@ -23,6 +35,13 @@ function Create() {
                 title_folder_name: { value: title },
                 date_date: { value: date },
                 description: { value: description },
+                picture: {
+                  value: [
+                    {
+                      fileKey: fileIds[0],
+                    },
+                  ],
+                },
               },
             })
             .then((res) => console.log(res));
