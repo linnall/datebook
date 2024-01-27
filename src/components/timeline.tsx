@@ -40,16 +40,18 @@ interface MilestonesProps {
   description: string;
 }
 
-const Milestones = (milestones: MilestonesProps[]) => {
+const Milestones = (props) => {
   const isMobile = useBreakpointValue({ base: true, md: false });
   const isDesktop = useBreakpointValue({ base: false, md: true });
+
+  if (!props.milestones) return null;
 
   return (
     <Container maxWidth="7xl" p={{ base: 2, sm: 10 }}>
       <chakra.h3 fontSize="4xl" fontWeight="bold" mb={18} textAlign="center">
         Milestones
       </chakra.h3>
-      {milestones.map((milestone) => (
+      {props.milestones.map((milestone) => (
         <Flex key={milestone.id} mb="10px">
           {/* Desktop view(left card) */}
           {isDesktop && milestone.id % 2 === 0 && (
@@ -194,4 +196,5 @@ const EmptyCard = () => {
   );
 };
 
-export default Milestones;
+export { Milestones };
+export type { MilestonesProps };
