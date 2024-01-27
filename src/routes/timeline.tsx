@@ -15,9 +15,9 @@ function Timeline() {
 
   const milestones = data?.map((record: any) => ({
     id: record.$id.value,
-    date: "July 30, 2021",
+    date: record.date_date.value,
     title: record.title_folder_name.value,
-    description: "placeholder",
+    description: record.description.value,
   })) as MilestonesProps[];
 
   return (

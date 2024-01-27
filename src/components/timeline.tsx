@@ -1,27 +1,4 @@
-import React from "react";
 import { Box, chakra, Container, Text, HStack, VStack, Flex, useColorModeValue, useBreakpointValue } from "@chakra-ui/react";
-
-const dummyMilestones = [
-  {
-    id: 1,
-    date: "MARCH 30, 2022",
-    title: "Chakra Hackathon",
-    description: `Winner of first ever ChakraUI Hackathon. On sait depuis longtemps que travailler avec du texte lisible et contenant du sens.`,
-  },
-  {
-    id: 2,
-    date: "July 30, 2021",
-    title: "Open Source, first contribution",
-    description: `Fixing a typo, to fix a bug, contributing to Open Source and collaborating to improve technology for everyone, Ahmad's world changed again!.`,
-  },
-  {
-    id: 3,
-    date: "July 30, 2018",
-    title: "Freelancing, started working for myself",
-    description:
-      "Ahmad starts his own business consulting for companies as a fullstack developer. Clients include UK Government departments, UK banks, global fintechs and startups.",
-  },
-];
 
 interface MilestonesProps {
   id: number;
@@ -121,7 +98,7 @@ const Card = ({ id, title, description, date }: CardProps) => {
         </Text>
 
         <VStack spacing={2} mb={3} textAlign="left">
-          <chakra.h1 fontSize="2xl" lineHeight={1.2} fontWeight="bold" w="100%">
+          <chakra.h1 fontSize="2xl" lineHeight={1.2} fontWeight="bold">
             {title}
           </chakra.h1>
           <Text fontSize="md">{description}</Text>
@@ -149,7 +126,6 @@ const LineWithDot = () => {
           left="0"
           bottom="0"
           right="0"
-          width="100%"
           height="100%"
           backgroundSize="cover"
           backgroundRepeat="no-repeat"
