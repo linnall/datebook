@@ -141,11 +141,9 @@ function Create() {
                   date_date: { value: date },
                   description: { value: description },
                   picture: {
-                    value: [
-                      {
-                        fileKey: fileIds[0],
-                      },
-                    ],
+                    value: fileIds.map((fileId) => ({
+                      fileKey: fileId,
+                    })),
                   },
                 },
               })

@@ -1,4 +1,4 @@
-import { Text, Image, Heading, VStack, Divider } from "@chakra-ui/react";
+import { Text, Image, Heading, VStack, Divider, WrapItem, Wrap } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { client } from "../main";
@@ -21,11 +21,17 @@ function Record() {
       <Text>{data.record.date_date.value}</Text>
       <Divider borderBottomWidth="2px" borderColor="#006175" />
       <Text>{data.record.description.value}</Text>
-      {pictures &&
-        pictures.map((picture: any) => {
-          const imageURI = `https://uofthacks.qhyun.org/proxy/k/v1/file.json?fileKey=${picture.fileKey}`;
-          return <Image key={picture.fileKey} maxW="15em" fit="cover" border="8px ridge #EFD69E" src={imageURI} />;
-        })}
+      <Wrap justify="center">
+        {pictures &&
+          pictures.map((picture: any) => {
+            const imageURI = `https://uofthacks.qhyun.org/proxy/k/v1/file.json?fileKey=${picture.fileKey}`;
+            return (
+              <WrapItem>
+                <Image key={picture.fileKey} maxW="15em" fit="cover" border="8px ridge #EFD69E" src={imageURI} />
+              </WrapItem>
+            );
+          })}
+      </Wrap>
     </VStack>
   );
 }
