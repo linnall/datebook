@@ -9,14 +9,7 @@ function Timeline() {
     client.record.getAllRecords({ app: 2 }).then((res) => setData(res));
   }, []);
 
-  const milestones = data?.map((record: any) => ({
-    id: record.$id.value,
-    date: record.date_date.value,
-    title: record.title_folder_name.value,
-    description: record.description.value,
-  }));
-
-  return <Milestones milestones={milestones} />;
+  return <Milestones milestones={data} />;
 }
 
 export default Timeline;

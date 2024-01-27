@@ -24,7 +24,7 @@ function Record() {
       {pictures &&
         pictures.map((picture: any) => {
           const imageURI = `https://uofthacks.qhyun.org/proxy/k/v1/file.json?fileKey=${picture.fileKey}`;
-          return <Image maxW="15em" fit="cover" border="8px ridge #EFD69E" src={imageURI} />;
+          return <Image key={picture.fileKey} maxW="15em" fit="cover" border="8px ridge #EFD69E" src={imageURI} />;
         })}
     </VStack>
   );

@@ -2,13 +2,24 @@ import { Box, chakra, Container, Text, HStack, VStack, Flex, useColorModeValue, 
 import { useNavigate } from "react-router-dom";
 
 export const Milestones = (props) => {
+  const milestones = props.milestones
+    ?.map((record: any) => ({
+      id: record.$id.value,
+      date: record.date_date.value,
+      title: record.title_folder_name.value,
+      description: record.description.value,
+    }))
+    .sort((a, b) => {
+      return a.date - b.date;
+    });
+
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
-  if (!props.milestones) return null;
+  if (!milestones) return null;
 
   return (
     <Container maxWidth="7xl" p={{ base: 2, sm: 10 }}>
-      {props.milestones.map((milestone) => (
+      {milestones.map((milestone) => (
         <Flex key={milestone.id} mb="10px">
           {/* Desktop view(left card) */}
           {isDesktop && milestone.id % 2 === 0 && (
@@ -80,7 +91,7 @@ const Card = ({ id, title, description, date }: CardProps) => {
           {date}
         </Text>
 
-        <VStack spacing={2} mb={3} textAlign="left">
+        <VStack spacing={2} mb={3} alignItems="start">
           <chakra.h1 fontSize="2xl" lineHeight={1.2} fontWeight="bold">
             {title}
           </chakra.h1>
