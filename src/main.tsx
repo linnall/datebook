@@ -8,6 +8,7 @@ import Login from "./routes/login.tsx";
 import Timeline from "./routes/timeline.tsx";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { KintoneRestAPIClient } from "@kintone/rest-api-client";
+import "./main.css";
 
 export const client = new KintoneRestAPIClient({
   baseUrl: "https://uofthacks.qhyun.org/proxy",

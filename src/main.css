@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "my_font";
+  src: url("/public/Chicago.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body,
+* {
+  font-family: "my_font", sans-serif !important;
+}
