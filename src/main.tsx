@@ -18,12 +18,12 @@ export const client = new KintoneRestAPIClient({
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Login />,
+  },
+  {
+    path: "/signed_in",
     element: <NavBar />,
     children: [
-      {
-        path: "",
-        element: <Login />,
-      },
       {
         path: "timeline",
         element: <Timeline />,
@@ -41,7 +41,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     domain="dev-nddjtjvojvrqbgat.us.auth0.com"
     clientId="mi8q01NBQMLKrcBnAj104HK3q1qnMDDB"
     authorizationParams={{
-      redirect_uri: "http://localhost:5173/timeline",
+      redirect_uri: `${document.location.href}signed_in/timeline`,
     }}
   >
     <React.StrictMode>

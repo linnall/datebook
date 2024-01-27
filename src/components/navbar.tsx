@@ -11,8 +11,8 @@ const NavBar = () => {
               Datebook
             </Text>
           </HStack>
-          <Link to={"/timeline"}>Timeline</Link>
-          <Link to={"/create"}>Add</Link>
+          <Link to={"/signed_in/timeline"}>Timeline</Link>
+          <Link to={"/signed_in/create"}>Create</Link>
         </HStack>
       </HStack>
       <Outlet />
