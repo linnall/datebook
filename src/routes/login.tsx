@@ -1,18 +1,9 @@
-import {
-  AbsoluteCenter,
-  Button,
-  Center,
-  Container,
-  Image,
-  SkeletonText,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { AbsoluteCenter, Button, Center, Container, Image, SkeletonText, Text, VStack } from "@chakra-ui/react";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useRef, useState } from "react";
 import { cohere } from "../main";
-import title from "../../public/datebook-title.png";
-import icon from "../../public/datebook-icon.gif";
+import title from "./datebook-title.png";
+import icon from "./datebook-icon.gif";
 
 const Login = () => {
   const { loginWithRedirect } = useAuth0();
@@ -41,15 +32,7 @@ const Login = () => {
         <VStack gap={10}>
           <Image src={title} />
           <Image src={icon} />
-          <SkeletonText
-            w="full"
-            h="full"
-            isLoaded={quote != ""}
-            mt="4"
-            noOfLines={5}
-            spacing="4"
-            skeletonHeight="2"
-          >
+          <SkeletonText w="full" h="full" isLoaded={quote != ""} mt="4" noOfLines={5} spacing="4" skeletonHeight="2">
             <Text align="justify">{quote}</Text>
           </SkeletonText>
           <Button onClick={() => loginWithRedirect()}>Log In</Button>

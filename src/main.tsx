@@ -1,16 +1,16 @@
+import { Auth0Provider } from "@auth0/auth0-react";
 import { ChakraProvider } from "@chakra-ui/react";
+import { KintoneRestAPIClient } from "@kintone/rest-api-client";
+import { CohereClient } from "cohere-ai";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createHashRouter, RouterProvider } from "react-router-dom";
 import NavBar from "./components/navbar.tsx";
+import "./main.css";
 import Create from "./routes/create.tsx";
 import Login from "./routes/login.tsx";
-import Timeline from "./routes/timeline.tsx";
-import { Auth0Provider } from "@auth0/auth0-react";
-import { KintoneRestAPIClient } from "@kintone/rest-api-client";
 import Record from "./routes/record.tsx";
-import { CohereClient } from "cohere-ai";
-import "./main.css";
+import Timeline from "./routes/timeline.tsx";
 
 export const client = new KintoneRestAPIClient({
   baseUrl: "https://uofthacks.qhyun.org/proxy",
@@ -21,7 +21,7 @@ export const cohere = new CohereClient({
   token: "pbIN0u4sGtCHSmENMvJbdMjKVpBONnshY7S9Lk77",
 });
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Login />,
@@ -51,7 +51,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     domain="dev-nddjtjvojvrqbgat.us.auth0.com"
     clientId="mi8q01NBQMLKrcBnAj104HK3q1qnMDDB"
     authorizationParams={{
-      redirect_uri: `${document.location.href}signed_in/timeline`,
+      redirect_uri: `${document.location.href}#/signed_in/timeline`,
     }}
   >
     <React.StrictMode>
