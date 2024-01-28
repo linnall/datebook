@@ -1,8 +1,22 @@
-import { Text, Image, Heading, VStack, Divider, WrapItem, Wrap, HStack } from "@chakra-ui/react";
+import {
+  Text,
+  Image,
+  Heading,
+  VStack,
+  Divider,
+  WrapItem,
+  Wrap,
+  HStack,
+  Button,
+  Flex,
+  Box,
+  Spacer,
+} from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { client, cohere } from "../main";
 import { BsEmojiFrown, BsEmojiSmile, BsEmojiNeutral } from "react-icons/bs";
+import back_arrow from "./back_arrow.png";
 
 const examples = [
   { text: "We had an enjoyable time", label: "positive" },
@@ -38,32 +52,42 @@ function Record() {
   const pictures = data.record?.picture?.value;
 
   return (
-    <VStack align="start" pt="20">
-      <Heading size="lg">{data.record.title_folder_name.value}</Heading>
-      <Text>{data.record.date_date.value}</Text>
-      <Divider borderBottomWidth="2px" borderColor="#006175" />
-      <HStack>
-        {
+    <>
+      <Box as="button" marginRight="auto" onClick={() => window.history.go(-1)}>
+        <Image src={back_arrow} />
+      </Box>
+      <VStack align="start" pt="20">
+        <Heading size="lg">{data.record.title_folder_name.value}</Heading>
+        <Text>{data.record.date_date.value}</Text>
+        <Divider borderBottomWidth="2px" borderColor="#006175" />
+        <HStack>
           {
-            negative: <BsEmojiFrown />,
-            neutral: <BsEmojiNeutral />,
-            positive: <BsEmojiSmile />,
-          }[classify]
-        }
-        <Text>{data.record.description.value}</Text>
-      </HStack>
-      <Wrap justify="center">
-        {pictures &&
-          pictures.map((picture: any) => {
-            const imageURI = `https://uofthacks.qhyun.org/proxy/k/v1/file.json?fileKey=${picture.fileKey}`;
-            return (
-              <WrapItem key={picture.fileKey}>
-                <Image maxW="15em" fit="cover" border="8px ridge #EFD69E" src={imageURI} />
-              </WrapItem>
-            );
-          })}
-      </Wrap>
-    </VStack>
+            {
+              negative: <BsEmojiFrown />,
+              neutral: <BsEmojiNeutral />,
+              positive: <BsEmojiSmile />,
+            }[classify]
+          }
+          <Text>{data.record.description.value}</Text>
+        </HStack>
+        <Wrap justify="center">
+          {pictures &&
+            pictures.map((picture: any) => {
+              const imageURI = `https://uofthacks.qhyun.org/proxy/k/v1/file.json?fileKey=${picture.fileKey}`;
+              return (
+                <WrapItem key={picture.fileKey}>
+                  <Image
+                    maxW="15em"
+                    fit="cover"
+                    border="8px ridge #EFD69E"
+                    src={imageURI}
+                  />
+                </WrapItem>
+              );
+            })}
+        </Wrap>
+      </VStack>
+    </>
   );
 }
 

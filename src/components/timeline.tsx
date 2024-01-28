@@ -1,4 +1,14 @@
-import { Box, chakra, Container, Text, HStack, VStack, Flex, useColorModeValue, useBreakpointValue } from "@chakra-ui/react";
+import {
+  Box,
+  chakra,
+  Container,
+  Text,
+  HStack,
+  VStack,
+  Flex,
+  useColorModeValue,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
 export const Milestones = (props) => {
@@ -78,7 +88,10 @@ const Card = ({ id, title, description, date, isLeft }: CardProps) => {
         content: `""`,
         w: "0",
         h: "0",
-        borderColor: `transparent ${useColorModeValue("#edf2f6", "#1a202c")} transparent`,
+        borderColor: `transparent ${useColorModeValue(
+          "#edf2f6",
+          "#1a202c"
+        )} transparent`,
         borderStyle: "solid",
         borderWidth: borderWidthValue,
         position: "absolute",
@@ -105,7 +118,12 @@ const Card = ({ id, title, description, date, isLeft }: CardProps) => {
 
 const LineWithDot = () => {
   return (
-    <Flex pos="relative" alignItems="center" mr={{ base: "40px", md: "40px" }} ml={{ base: "0", md: "40px" }}>
+    <Flex
+      pos="relative"
+      alignItems="center"
+      mr={{ base: "40px", md: "40px" }}
+      ml={{ base: "0", md: "40px" }}
+    >
       <chakra.span
         position="absolute"
         left="50%"
@@ -136,5 +154,11 @@ const LineWithDot = () => {
 };
 
 const EmptyCard = () => {
-  return <Box flex={{ base: 0, md: 1 }} p={{ base: 0, md: 6 }} bg="transparent"></Box>;
+  return (
+    <Box
+      flex={{ base: 0, md: 1 }}
+      p={{ base: 0, md: 6 }}
+      bg="transparent"
+    ></Box>
+  );
 };
