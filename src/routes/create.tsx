@@ -18,6 +18,7 @@ import { client } from "../main";
 import { Image } from "@chakra-ui/react";
 import { Wrap, WrapItem } from "@chakra-ui/react";
 import { Container } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const ImagePreview: React.FC<{ file: File }> = (props) => {
   const [imageURI, setImageURI] = useState<any>();
@@ -38,9 +39,12 @@ const ImagePreview: React.FC<{ file: File }> = (props) => {
 
 function Create() {
   const [title, setTitle] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [description, setDescription] = useState(null);
   const [date, setDate] = useState(null);
   const [photos, setPhotos] = useState<FileList>(null);
+
+  const navigate = useNavigate();
 
   const photosArray = Array.from(photos ?? []);
 
@@ -105,7 +109,9 @@ function Create() {
           <FormErrorMessage>Date is required.</FormErrorMessage>
         </FormControl>
         <Button
+          disabled={loading}
           onClick={async () => {
+            setLoading(true);
             if (!title) {
               setTitle("");
               return;
@@ -147,10 +153,14 @@ function Create() {
                   },
                 },
               })
-              .then((res) => console.log(res));
+              .then((res) => navigate(`/signed_in/record/${res.id}`))
+              .catch((err) => {
+                console.error(err);
+                setLoading(false);
+              });
           }}
         >
-          Create
+          {loading ? "Loading..." : "Create"}
         </Button>
       </VStack>
     </Container>

@@ -16,6 +16,7 @@ export const Milestones = (props) => {
   const isDesktop = useBreakpointValue({ base: false, md: true });
 
   if (!milestones) return null;
+  if (milestones.length == 0) return <Text pt="10%">Nothing here yet :(</Text>;
 
   return (
     <Container maxWidth="7xl" p={{ base: 2, sm: 10 }}>
