@@ -22,7 +22,12 @@ const Login = () => {
         maxTokens: 100,
       })
       .then((res) => {
-        setQuote(res.generations[0].text.replace(/scrapbook/gi, "datebook"));
+        setQuote(
+          res.generations[0].text
+            .replace(/scrapbook/gi, "datebook")
+            .replace('"', "")
+            .replace('"', "")
+        );
       });
   }, []);
 
@@ -33,7 +38,7 @@ const Login = () => {
           <Image src={title} />
           <Image src={icon} />
           <SkeletonText w="full" h="full" isLoaded={quote != ""} mt="4" noOfLines={5} spacing="4" skeletonHeight="2">
-            <Text align="justify">{quote}</Text>
+            <Text textAlign="center">{quote}</Text>
           </SkeletonText>
           <Button onClick={() => loginWithRedirect()}>Log In</Button>
         </VStack>
