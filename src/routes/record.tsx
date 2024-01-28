@@ -7,13 +7,10 @@ import {
   WrapItem,
   Wrap,
   HStack,
-  Button,
-  Flex,
   Box,
-  Spacer,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { client, cohere } from "../main";
 import { BsEmojiFrown, BsEmojiSmile, BsEmojiNeutral } from "react-icons/bs";
 import back_arrow from "./back_arrow.png";
@@ -53,8 +50,10 @@ function Record() {
 
   return (
     <>
-      <Box as="button" marginRight="auto" onClick={() => window.history.go(-1)}>
-        <Image src={back_arrow} />
+      <Box marginRight="auto">
+        <Link to={"/signed_in/timeline"}>
+          <Image src={back_arrow} />
+        </Link>
       </Box>
       <VStack align="start" pt="20">
         <Heading size="lg">{data.record.title_folder_name.value}</Heading>
