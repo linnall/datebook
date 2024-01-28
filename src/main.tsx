@@ -9,11 +9,16 @@ import Timeline from "./routes/timeline.tsx";
 import { Auth0Provider } from "@auth0/auth0-react";
 import { KintoneRestAPIClient } from "@kintone/rest-api-client";
 import Record from "./routes/record.tsx";
+import { CohereClient } from "cohere-ai";
 import "./main.css";
 
 export const client = new KintoneRestAPIClient({
   baseUrl: "https://uofthacks.qhyun.org/proxy",
   auth: { apiToken: "In6YFm0X5ek3iwrQj8I0iwXiHnTnkQwRwMDVGHnP" },
+});
+
+export const cohere = new CohereClient({
+  token: "pbIN0u4sGtCHSmENMvJbdMjKVpBONnshY7S9Lk77",
 });
 
 const router = createBrowserRouter([

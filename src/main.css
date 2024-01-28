@@ -1,6 +1,6 @@
 @font-face {
   font-family: "my_font";
-  src: url("/public/Chicago.ttf");
+  src: url("Chicago.ttf");
   font-weight: normal;
   font-style: normal;
 }
